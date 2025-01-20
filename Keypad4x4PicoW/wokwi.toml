@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = 'build/Keypad4x4PicoW.uf2'
+elf = 'build/Keypad4x4PicoW.elf'

@@ -1,0 +1,59 @@
+# Keypad com Buzzer e LEDs no Raspberry Pi Pico
+
+Este projeto implementa a leitura de um keypad 4x4, com emissão de som através de um buzzer e controle de LEDs RGB em um Raspberry Pi Pico.
+
+## Componentes Utilizados
+
+- Raspberry Pi Pico
+- Keypad 4x4
+- Buzzer
+- LEDs RGB
+- Resistores
+- Fios jumper
+
+## Descrição do Código
+
+O código está dividido nas seguintes seções:
+
+1. **Bibliotecas e Definições:**
+   - Inclusão das bibliotecas padrão e específicas do hardware.
+   - Definição das linhas e colunas do keypad.
+   - Definição dos pinos GPIO para o buzzer e LEDs.
+
+2. **Inicialização do PWM para o Buzzer:**
+   - Função `pwm_init_buzzer` para configurar o PWM no pino do buzzer.
+   - Função `beep` para emitir um som no buzzer por uma duração especificada.
+
+3. **Configuração dos GPIOs do Keypad:**
+   - Inicialização dos pinos das linhas como saídas e das colunas como entradas com resistor pull-up.
+
+4. **Leitura do Keypad:**
+   - Função `keypad_get_key` para verificar qual tecla foi pressionada.
+
+5. **Controle dos LEDs e Buzzer:**
+   - Acionamento dos LEDs RGB e do buzzer com base na tecla pressionada.
+
+## Como Usar
+
+1. Conecte o keypad 4x4 aos pinos GPIO do Raspberry Pi Pico conforme definido no código.
+2. Conecte o buzzer e os LEDs RGB aos pinos GPIO correspondentes.
+3. Compile e carregue o código no Raspberry Pi Pico.
+4. Abra o monitor serial para visualizar as teclas pressionadas e observar o comportamento dos LEDs e do buzzer.
+
+## Exemplo de Saída
+
+Ao pressionar uma tecla no keypad, a tecla correspondente será exibida no monitor serial e as seguintes ações ocorrerão:
+- Tecla 'A': LED verde acende.
+- Tecla 'B': LED azul acende.
+- Tecla 'C': LED vermelho acende.
+- Tecla 'D': Todos os LEDs acendem.
+- Tecla '#': Buzzer emite um bip.
+
+## Licença
+
+Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## Autores
+
+- Seu Nome - [seuemail@example.com](mailto:seuemail@example.com)
+
