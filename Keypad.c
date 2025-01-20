@@ -16,6 +16,18 @@ const int bluePin = 12;
 
 const int buzzerPin = 21;
 
+// Função para inicializar o buzzer com PWM
+void pwm_init_buzzer() {
+    pinMode(buzzerPin, OUTPUT);
+}
+
+// Função para emitir um beep no buzzer
+void beep(int frequency, int duration) {
+    ledcWriteTone(0, frequency);  // Especifica a frequência do buzzer
+    delay(duration);               // Duração do som
+    ledcWriteTone(0, 0);           // Para o som
+}
+
 void setup() {
     Serial.begin(115200);
 
@@ -71,7 +83,7 @@ void loop() {
                         digitalWrite(bluePin, LOW);
                         break;
                     case 'A': 
-                        tone(buzzerPin, 1000, 500);
+                        beep(1000, 500);  // Chama a função beep com frequência de 1000Hz e duração de 500ms
                         break;
                     default:
                         Serial.println("Tecla sem função atribuída.");
