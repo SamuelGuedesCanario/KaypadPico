@@ -81,6 +81,96 @@ Configurar buzzers:
 
 Acione os buzzers para emitir sons quando a tecla # for pressionada.
 Desenvolver lógica de código secreto (opcional):
+Como Funciona o Código Especial
+O projeto inclui uma funcionalidade de código secreto, onde uma sequência específica de teclas no teclado matricial ativa uma rotina especial. Abaixo estão as instruções detalhadas sobre como o código especial funciona.
+
+Definição do Código Especial
+O código secreto é uma sequência pré-definida de teclas que o usuário deve digitar. Neste projeto, o código secreto é:
+
+#define SECRET_CODE "1234"
+Código secreto atual: 1234
+Tamanho do código secreto: 4 teclas
+Funcionamento Geral
+Captura das Teclas:
+
+Cada tecla pressionada no teclado matricial é capturada e exibida no terminal.
+As teclas válidas para o código secreto são adicionadas a um buffer temporário (entered_code).
+Verificação do Código:
+
+Após pressionar 4 teclas (tamanho do código secreto), o buffer é comparado com o código secreto.
+Se as teclas digitadas corresponderem ao código, a rotina especial é ativada.
+Caso contrário, o buffer é limpo para permitir uma nova tentativa.
+
+Rotina Especial:
+
+Quando o código correto é detectado, os LEDs (vermelho, verde e azul) piscam 5 vezes, indicando o sucesso.
+Reinicialização do Buffer:
+
+Após a execução da rotina especial ou tentativa incorreta, o buffer é reiniciado automaticamente.
+Etapas do Código
+1. Captura das Teclas
+As teclas pressionadas são capturadas pela função keypad_get_key() no loop principal. Exemplo:
+
+char key = keypad_get_key();
+if (key != '\0') {
+    printf("Tecla pressionada: %c\n", key);
+    entered_code[code_index++] = key; // Adiciona ao buffer
+}
+2. Verificação do Código
+Quando o buffer atinge o tamanho do código secreto, ele é comparado com o código predefinido:
+
+if (code_index == CODE_LENGTH) {
+    entered_code[CODE_LENGTH] = '\0'; // Adiciona o terminador de string
+    if (strcmp(entered_code, SECRET_CODE) == 0) {
+        special_routine(); // Código correto
+    } else {
+        printf("Código incorreto: %s\n", entered_code); // Código errado
+    }
+    code_index = 0; // Reinicia o buffer
+}
+3. Rotina Especial
+Quando o código correto é inserido, a função special_routine() é chamada, fazendo os LEDs piscarem:
+
+void special_routine() {
+    for (int i = 0; i < 5; i++) {
+        gpio_put(red_pin, 1);
+        gpio_put(green_pin, 1);
+        gpio_put(blue_pin, 1);
+        sleep_ms(200);
+        gpio_put(red_pin, 0);
+        gpio_put(green_pin, 0);
+        gpio_put(blue_pin, 0);
+        sleep_ms(200);
+    }
+    printf("Rotina especial ativada!\n");
+}
+
+Exemplo de Uso:
+
+Código Secreto Correto
+Pressione as teclas na ordem correta: 1, 2, 3, 4.
+Resultado:
+Todos os LEDs (vermelho, verde e azul) piscarão 5 vezes.
+Mensagem no terminal: Rotina especial ativada!
+
+Código Secreto Incorreto
+Pressione uma sequência diferente, como 1, 2, 5, 6.
+
+Resultado:
+Mensagem no terminal: Código incorreto: 1256
+O buffer será reiniciado para aceitar uma nova tentativa.
+Resumo do Fluxo
+Pressione as teclas válidas (A, B, C, #) para digitar o código secreto.
+O sistema captura as teclas e as armazena no buffer entered_code.
+Quando o número de teclas digitadas atinge 4 (tamanho do código secreto):
+Se o código for correto, a rotina especial será ativada.
+Se o código for incorreto, o sistema limpa o buffer e aguarda uma nova tentativa.
+Por Que Usar o Código Especial?
+O código especial pode ser expandido para:
+
+Desafios interativos.
+Segurança: Simule sistemas que exigem senhas para liberar acesso.
+Jogos simples: Onde sequências de teclas ativam ações específicas
 
 Adicione uma funcionalidade onde a combinação correta de teclas ativa uma ação especial.
 Observações Finais
