@@ -123,6 +123,12 @@ void special_routine()
     printf("Rotina especial ativada!\n");
 }
 
+void inicializar_gpio_saida(uint pino){
+    gpio_init(pino);
+    gpio_set_dir(pino, GPIO_OUT);
+    gpio_put(pino, 0);
+}
+
 int main()
 {
     stdio_init_all();
@@ -132,22 +138,10 @@ int main()
     keypad_init();
 
     // Configura os pinos dos LEDs
-    gpio_init(red_pin);
-    gpio_set_dir(red_pin, GPIO_OUT);
-    gpio_put(red_pin, 0);
-
-    gpio_init(green_pin);
-    gpio_set_dir(green_pin, GPIO_OUT);
-    gpio_put(green_pin, 0);
-
-    gpio_init(blue_pin);
-    gpio_set_dir(blue_pin, GPIO_OUT);
-    gpio_put(blue_pin, 0);
-
-    // Configura o pino do buzzer
-    gpio_init(BUZZER_PINA);
-    gpio_set_dir(BUZZER_PINA, GPIO_OUT);
-    gpio_put(BUZZER_PINA, 0);
+    inicializar_gpio_saida(red_pin);
+    inicializar_gpio_saida(green_pin);
+    inicializar_gpio_saida(blue_pin);
+    inicializar_gpio_saida(BUZZER_PINA);
 
     while (1)
     {
