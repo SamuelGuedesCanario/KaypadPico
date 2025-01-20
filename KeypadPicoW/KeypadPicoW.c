@@ -116,8 +116,7 @@ int main()
                 else
                 { // off to on
                     led_control(red_pin, true, "RED");
-                }
-                break break;
+                }break;
             case 'B':
                 if (gpio_get(green_pin))
                 { // on to off
@@ -128,7 +127,6 @@ int main()
                     led_control(green_pin, true, "GREEN");
                 }
                 break;
-                break;
             case 'C':
                 if (gpio_get(blue_pin))
                 { // on to off
@@ -138,7 +136,6 @@ int main()
                 { // off to on
                     led_control(blue_pin, true, "BLUE");
                 }
-                break;
                 break;
             case 'D':
                 if (all_led_var)
@@ -155,7 +152,6 @@ int main()
                     led_control(blue_pin, true, "BLUE");
                     all_led_var = true;
                 }
-                break;
                 break;
             case '#':
                 /* code */
